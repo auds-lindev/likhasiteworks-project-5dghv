@@ -1,6 +1,5 @@
 ---
-title: 
-colorFrom: pink
+title: Lumiere
 colorTo: red
 emoji: 🔧
 tags:
