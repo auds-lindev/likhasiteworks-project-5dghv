@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumière Salon & Spa | Luxury Beauty Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'blush': '#E8B4B8',
+                        'blush-dark': '#D4A5A5',
+                        'cream': '#FAF5F0',
+                        'cream-dark': '#F5EDE4',
+                        'champagne': '#D4AF37',
+                        'charcoal': '#2C2C2C',
+                        'soft-gray': '#8B8680',
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'serif'],
+                        'sans': ['Lato', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+        }
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+        }
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        .service-icon {
+            transition: transform 0.3s ease;
+        }
+        .gallery-item {
+            overflow: hidden;
+        }
+        .gallery-item img {
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        .testimonial-slide {
+            display: none;
+        }
+        .testimonial-slide.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .nav-scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="bg-cream text-charcoal antialiased">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="#" class="font-serif text-2xl font-bold tracking-wider text-charcoal">
+                Lumière<span class="text-blush">.</span>
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="text-sm tracking-widest uppercase hover:text-blush transition-colors">About</a>
+                <a href="#services" class="text-sm tracking-widest uppercase hover:text-blush transition-colors">Services</a>
+                <a href="#team" class="text-sm tracking-widest uppercase hover:text-blush transition-colors">Team</a>
+                <a href="#gallery" class="text-sm tracking-widest uppercase hover:text-blush transition-colors">Gallery</a>
+                <a href="#contact" class="px-6 py-2 bg-charcoal text-white text-sm tracking-widest uppercase hover:bg-blush transition-colors rounded-sm">
+                    Book Now
+                </a>
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white shadow-lg">
+            <div class="flex flex-col p-6 space-y-4">
+                <a href="#about" class="text-sm tracking-widest uppercase">About</a>
+                <a href="#services" class="text-sm tracking-widest uppercase">Services</a>
+                <a href="#team" class="text-sm tracking-widest uppercase">Team</a>
+                <a href="#gallery" class="text-sm tracking-widest uppercase">Gallery</a>
+                <a href="#contact" class="text-blush font-semibold">Book Appointment</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://static.photos/cosmetic/1200x630/1" alt="Luxury Salon Interior" class="w-full h-full object-cover opacity-90">
+            <div class="absolute inset-0 bg-gradient-to-b from-cream/30 via-transparent to-cream"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto fade-in">
+            <p class="text-sm tracking-[0.3em] uppercase mb-4 text-soft-gray">Est. 2018 • New York</p>
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl mb-6 leading-tight">
+                Where Beauty<br>
+                <span class="italic text-blush">Meets Artistry</span>
+            </h1>
+            <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto text-soft-gray font-light">
+                Experience luxury hair styling, skincare, and wellness treatments in an intimate, sophisticated atmosphere.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#contact" class="px-8 py-4 bg-charcoal text-white tracking-widest uppercase text-sm hover:bg-blush transition-all duration-300 rounded-sm">
+                    Reserve Your Visit
+                </a>
+                <a href="#services" class="px-8 py-4 border border-charcoal text-charcoal tracking-widest uppercase text-sm hover:bg-charcoal hover:text-white transition-all duration-300 rounded-sm">
+                    Explore Services
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6 bg-cream">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="relative fade-in">
+                    <img src="https://static.photos/wellness/640x360/42" alt="Salon Atmosphere" class="w-full rounded-sm shadow-xl">
+                    <div class="absolute -bottom-8 -right-8 w-48 h-48 bg-blush/20 rounded-full -z-10"></div>
+                    <div class="absolute -top-8 -left-8 w-32 h-32 bg-champagne/20 rounded-full -z-10"></div>
+                </div>
+                
+                <div class="fade-in">
+                    <p class="text-blush text-sm tracking-[0.3em] uppercase mb-4">Our Story</p>
+                    <h2 class="font-serif text-4xl md:text-5xl mb-6">A Sanctuary of<br>Self-Care & Style</h2>
+                    <p class="text-soft-gray mb-6 leading-relaxed">
+                        Founded in 2018, Lumière Salon was born from a passion for transformative beauty experiences. We believe that luxury isn't just about the services we offer—it's about how you feel from the moment you walk through our doors.
+                    </p>
+                    <p class="text-soft-gray mb-8 leading-relaxed">
+                        Our team of internationally trained stylists and estheticians combine technical expertise with artistic vision to create looks that enhance your natural beauty. Using only premium, sustainable products, we ensure that every treatment nourishes both you and the environment.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-8 pt-8 border-t border-charcoal/10">
+                        <div class="text-center">
+                            <p class="font-serif text-3xl text-blush mb-1">6+</p>
+                            <p class="text-xs tracking-widest uppercase text-soft-gray">Years Experience</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="font-serif text-3xl text-blush mb-1">15k</p>
+                            <p class="text-xs tracking-widest uppercase text-soft-gray">Happy Clients</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="font-serif text-3xl text-blush mb-1">12</p>
+                            <p class="text-xs tracking-widest uppercase text-soft-gray">Expert Stylists</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 fade-in">
+                <p class="text-blush text-sm tracking-[0.3em] uppercase mb-4">What We Offer</p>
+                <h2 class="font-serif text-4xl md:text-5xl mb-4">Signature Services</h2>
+                <p class="text-soft-gray max-w-2xl mx-auto">Indulge in our curated menu of treatments designed to rejuvenate, transform, and elevate your natural beauty.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card group p-8 bg-cream rounded-sm hover-lift cursor-pointer fade-in">
+                    <div class="service-icon w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">
+                        <i data-lucide="scissors" class="w-8 h-8 text-blush"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl mb-3">Hair Styling</h3>
+                    <p class="text-soft-gray text-sm leading-relaxed mb-4">Precision cuts, balayage, extensions, and bespoke color services tailored to your unique style.</p>
+                    <span class="text-blush text-sm tracking-widest uppercase group-hover:underline">From $85</span>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card group p-8 bg-cream rounded-sm hover-lift cursor-pointer fade-in">
+                    <div class="service-icon w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">
+                        <i data-lucide="sparkles" class="w-8 h-8 text-blush"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl mb-3">Skin Care</h3>
+                    <p class="text-soft-gray text-sm leading-relaxed mb-4">Luxury facials, microdermabrasion, and anti-aging treatments using medical-grade products.</p>
+                    <span class="text-blush text-sm tracking-widest uppercase group-hover:underline">From $120</span>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card group p-8 bg-cream rounded-sm hover-lift cursor-pointer fade-in">
+                    <div class="service-icon w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">
+                        <i data-lucide="hand" class="w-8 h-8 text-blush"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl mb-3">Nail Artistry</h3>
+                    <p class="text-soft-gray text-sm leading-relaxed mb-4">Gel manicures, spa pedicures, and custom nail art designs for the perfect finishing touch.</p>
+                    <span class="text-blush text-sm tracking-widest uppercase group-hover:underline">From $45</span>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card group p-8 bg-cream rounded-sm hover-lift cursor-pointer fade-in">
+                    <div class="service-icon w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">
+                        <i data-lucide="eye" class="w-8 h-8 text-blush"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl mb-3">Lash & Brow</h3>
+                    <p class="text-soft-gray text-sm leading-relaxed mb-4">Extensions, lifting, tinting, and microblading to frame your face with perfection.</p>
+                    <span class="text-blush text-sm tracking-widest uppercase group-hover:underline">From $65</span>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-card group p-8 bg-cream rounded-sm hover-lift cursor-pointer fade-in">
+                    <div class="service-icon w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">
+                        <i data-lucide="heart" class="w-8 h-8 text-blush"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl mb-3">Bridal Suite</h3>
+                    <p class="text-soft-gray text-sm leading-relaxed mb-4">Complete bridal packages including hair, makeup, and spa treatments for your special day.</p>
+                    <span class="text-blush text-sm tracking-widest uppercase group-hover:underline">From $350</span>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="service-card group p-8 bg-cream rounded-sm hover-lift cursor-pointer fade-in">
+                    <div class="service-icon w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">
+                        <i data-lucide="flower-2" class="w-8 h-8 text-blush"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl mb-3">Massage Therapy</h3>
+                    <p class="text-soft-gray text-sm leading-relaxed mb-4">Swedish, deep tissue, and hot stone massages to melt away tension and restore balance.</p>
+                    <span class="text-blush text-sm tracking-widest uppercase group-hover:underline">From $95</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-24 px-6 bg-cream-dark">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16 fade-in">
+                <p class="text-blush text-sm tracking-[0.3em] uppercase mb-4">Investment</p>
+                <h2 class="font-serif text-4xl md:text-5xl mb-4">Service Menu</h2>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Category 1 -->
+                <div class="bg-white p-8 rounded-sm shadow-sm fade-in">
+                    <h3 class="font-serif text-2xl mb-6 border-b border-blush/30 pb-2">Hair Services</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center group cursor-pointer">
+                            <div>
+                                <p class="font-medium">Women's Haircut & Style</p>
+                                <p class="text-sm text-soft-gray">Includes wash, scalp massage, and blowout</p>
+                            </div>
+                            <span class="font-serif text-xl text-blush">$85+</span>
+                        </div>
+                        <div class="flex justify-between items-center group cursor-pointer">
+                            <div>
+                                <p class="font-medium">Single Process Color</p>
+                                <p class="text-sm text-soft-gray">Full coverage or root touch-up</p>
+                            </div>
+                            <span class="font-serif text-xl text-blush">$95+</span>
+                        </div>
+                        <div class="flex justify-between items-center group cursor-pointer">
+                            <div>
+                                <p class="font-medium">Balayage / Highlights</p>
+                                <p class="text-sm text-soft-gray">Custom hand-painted highlights</p>
+                            </div>
+                            <span class="font-serif text-xl text-blush">$200+</span>
+                        </div>
+                        <div class="flex justify-between items-center group cursor-pointer">
+                            <div>
+                                <p class="font-medium">Keratin Treatment</p>
+                                <p class="text-sm text-soft-gray">Smoothing treatment, lasts 3-5 months</p>
+                            </div>
+                            <span class="font-serif text-xl text-blush">$350+</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 2 -->
+                <div class="bg-white p-8 rounded-sm shadow-sm fade-in">
+                    <h3 class="font-serif text-2xl mb-6 border-b border-blush/30 pb-2">Skin & Body</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center group cursor-pointer">
+                            <div>
+                                <p class="font-medium">Signature Facial</p>
+                                <p class="text-sm text-soft-gray">60-minute customized treatment</p>
+                            </div>
+                            <span class="font-serif text-xl text-blush">$120</span>
+                        </div>
+                        <div class="flex justify-between items-center group cursor-pointer">
+                            <div>
+                                <p class="font-medium">Chemical Peel</p>
+                                <p class="text-sm text-soft-gray">Resurfacing treatment for radiant skin</p>
+                            </div>
+                            <span class="font-serif text-xl text-blush">$150+</span>
+                        </div>
+                        <div class="flex justify-between items-center group cursor-pointer">
+                            <div>
+                                <p class="font-medium">Swedish Massage (60 min)</p>
+                                <p class="text-sm text-soft-gray">Relaxation and tension relief</p>
+                            </div>
+                            <span class="font-serif text-xl text-blush">$95</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 3 -->
+                <div class="bg-white p-8 rounded-sm shadow-sm fade-in">
+                    <h3 class="font-serif text-2xl mb-6 border-b border-blush/30 pb-2">Nail Care</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center group cursor-pointer">
+                            <div>
+                                <p class="font-medium">Luxury Manicure</p>
+                                <p class="text-sm text-soft-gray">Exfoliation, mask, and polish</p>
+                            </div>
+                            <span class="font-serif text-xl text-blush">$45</span>
+                        </div>
+                        <div class="flex justify-between items-center group cursor-pointer">
+                            <div>
+                                <p class="font-medium">Gel Manicure</p>
+                                <p class="text-sm text-soft-gray">Long-lasting gel polish</p>
+                            </div>
+                            <span class="font-serif text-xl text-blush">$55</span>
+                        </div>
+                        <div class="flex justify-between items-center group cursor-pointer">
+                            <div>
+                                <p class="font-medium">Spa Pedicure</p>
+                                <p class="text-sm text-soft-gray">Foot soak, scrub, massage, polish</p>
+                            </div>
+                            <span class="font-serif text-xl text-blush">$65</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 fade-in">
+                <p class="text-blush text-sm tracking-[0.3em] uppercase mb-4">The Artists</p>
+                <h2 class="font-serif text-4xl md:text-5xl mb-4">Meet Our Stylists</h2>
+                <p class="text-soft-gray max-w-2xl mx-auto">Each member of our team brings unique expertise and a passion for creating beautiful transformations.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Team Member 1 -->
+                <div class="group text-center fade-in">
+                    <div class="relative overflow-hidden rounded-sm mb-6">
+                        <img src="https://static.photos/people/320x240/101" alt="Sophia Chen" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-charcoal/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
+                            <a href="#" class="text-white hover:text-blush transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                            <a href="#" class="text-white hover:text-blush transition-colors"><i data-lucide="mail" class="w-5 h-5"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-xl mb-1">Sophia Chen</h3>
+                    <p class="text-blush text-sm tracking-widest uppercase mb-2">Creative Director</p>
+                    <p class="text-soft-gray text-sm">Specializing in precision cuts and dimensional color</p>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="group text-center fade-in">
+                    <div class="relative overflow-hidden rounded-sm mb-6">
+                        <img src="https://static.photos/people/320x240/102" alt="Isabella Romano" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-charcoal/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
+                            <a href="#" class="text-white hover:text-blush transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                            <a href="#" class="text-white hover:text-blush transition-colors"><i data-lucide="mail" class="w-5 h-5"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-xl mb-1">Isabella Romano</h3>
+                    <p class="text-blush text-sm tracking-widest uppercase mb-2">Color Specialist</p>
+                    <p class="text-soft-gray text-sm">Balayage expert & corrective color artist</p>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="group text-center fade-in">
+                    <div class="relative overflow-hidden rounded-sm mb-6">
+                        <img src="https://static.photos/people/320x240/103" alt="Emma Thompson" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-charcoal/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
+                            <a href="#" class="text-white hover:text-blush transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                            <a href="#" class="text-white hover:text-blush transition-colors"><i data-lucide="mail" class="w-5 h-5"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-xl mb-1">Emma Thompson</h3>
+                    <p class="text-blush text-sm tracking-widest uppercase mb-2">Esthetician</p>
+                    <p class="text-soft-gray text-sm">Medical-grade skincare & bridal makeup</p>
+                </div>
+
+                <!-- Team Member 4 -->
+                <div class="group text-center fade-in">
+                    <div class="relative overflow-hidden rounded-sm mb-6">
+                        <img src="https://static.photos/people/320x240/104" alt="Maya Johnson" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-charcoal/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
+                            <a href="#" class="text-white hover:text-blush transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                            <a href="#" class="text-white hover:text-blush transition-colors"><i data-lucide="mail" class="w-5 h-5"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-xl mb-1">Maya Johnson</h3>
+                    <p class="text-blush text-sm tracking-widest uppercase mb-2">Nail Artist</p>
+                    <p class="text-soft-gray text-sm">Custom nail art & luxury manicures</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-24 px-6 bg-cream">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 fade-in">
+                <p class="text-blush text-sm tracking-[0.3em] uppercase mb-4">Portfolio</p>
+                <h2 class="font-serif text-4xl md:text-5xl mb-4">Our Work</h2>
+                <p class="text-soft-gray max-w-2xl mx-auto">Browse through our latest transformations and get inspired for your next visit.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="gallery-item rounded-sm cursor-pointer fade-in">
+                    <img src="https://static.photos/cosmetic/320x240/201" alt="Hair Style 1" class="w-full h-64 object-cover">
+                </div>
+                <div class="gallery-item rounded-sm cursor-pointer fade-in">
+                    <img src="https://static.photos/cosmetic/320x240/202" alt="Hair Style 2" class="w-full h-64 object-cover">
+                </div>
+                <div class="gallery-item rounded-sm cursor-pointer fade-in">
+                    <img src="https://static.photos/cosmetic/320x240/203" alt="Nail Art" class="w-full h-64 object-cover">
+                </div>
+                <div class="gallery-item rounded-sm cursor-pointer fade-in">
+                    <img src="https://static.photos/cosmetic/320x240/204" alt="Makeup" class="w-full h-64 object-cover">
+                </div>
+                <div class="gallery-item rounded-sm cursor-pointer fade-in">
+                    <img src="https://static.photos/cosmetic/320x240/205" alt="Bridal" class="w-full h-64 object-cover">
+                </div>
+                <div class="gallery-item rounded-sm cursor-pointer fade-in">
+                    <img src="https://static.photos/cosmetic/320x240/206" alt="Color" class="w-full h-64 object-cover">
+                </div>
+                <div class="gallery-item rounded-sm cursor-pointer fade-in">
+                    <img src="https://static.photos/cosmetic/320x240/207" alt="Style" class="w-full h-64 object-cover">
+                </div>
+                <div class="gallery-item rounded-sm cursor-pointer fade-in">
+                    <img src="https://static.photos/cosmetic/320x240/208" alt="Treatment" class="w-full h-64 object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-24 px-6 bg-charcoal text-white">
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="text-blush text-sm tracking-[0.3em] uppercase mb-4 fade-in">Testimonials</p>
+            <h2 class="font-serif text-4xl md:text-5xl mb-12 fade-in">Client Love</h2>
+
+            <div id="testimonial-container" class="relative fade-in">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-slide active">
+                    <div class="flex justify-center mb-6">
+                        <i data-lucide="quote" class="w-12 h-12 text-blush opacity-50"></i>
+                    </div>
+                    <p class="text-xl md:text-2xl font-light italic mb-8 leading-relaxed">
+                        "Lumière is more than a salon—it's an experience. Sophia transformed my hair completely, and I've never felt more confident. The attention to detail and the calming atmosphere make every visit a treat."
+                    </p>
+                    <div class="flex items-center justify-center space-x-4">
+                        <img src="https://static.photos/people/200x200/301" alt="Client" class="w-12 h-12 rounded-full object-cover">
+                        <div class="text-left">
+                            <p class="font-serif text-lg">Victoria M.</p>
+                            <p class="text-sm text-gray-400">Loyal Client since 2019</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-slide">
+                    <div class="flex justify-center mb-6">
+                        <i data-lucide="quote" class="w-12 h-12 text-blush opacity-50"></i>
+                    </div>
+                    <p class="text-xl md:text-2xl font-light italic mb-8 leading-relaxed">
+                        "The bridal package was absolutely perfect. They took care of everything—from my hair and makeup to my bridesmaids. We all looked stunning and the photos came out beautifully!"
+                    </p>
+                    <div class="flex items-center justify-center space-x-4">
+                        <img src="https://static.photos/people/200x200/302" alt="Client" class="w-12 h-12 rounded-full object-cover">
+                        <div class="text-left">
+                            <p class="font-serif text-lg">Amanda K.</p>
+                            <p class="text-sm text-gray-400">Bride, June 2023</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-slide">
+                    <div class="flex justify-center mb-6">
+                        <i data-lucide="quote" class="w-12 h-12 text-blush opacity-50"></i>
+                    </div>
+                    <p class="text-xl md:text-2xl font-light italic mb-8 leading-relaxed">
+                        "Finally found a place that understands curly hair! Isabella gave me the best cut of my life. The products they use are incredible and my curls have never looked better."
+                    </p>
+                    <div class="flex items-center justify-center space-x-4">
+                        <img src="https://static.photos/people/200x200/303" alt="Client" class="w-12 h-12 rounded-full object-cover">
+                        <div class="text-left">
+                            <p class="font-serif text-lg">Rachel S.</p>
+                            <p class="text-sm text-gray-400">Curly Hair Specialist Client</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dots -->
+            <div class="flex justify-center space-x-2 mt-8">
+                <button class="testimonial-dot w-3 h-3 rounded-full bg-blush transition-all" data-index="0"></button>
+                <button class="testimonial-dot w-3 h-3 rounded-full bg-white/30 hover:bg-blush transition-all" data-index="1"></button>
+                <button class="testimonial-dot w-3 h-3 rounded-full bg-white/30 hover:bg-blush transition-all" data-index="2"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact/Booking Section -->
+    <section id="contact" class="py-24 px-6 bg-cream">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <!-- Contact Info -->
+                <div class="fade-in">
+                    <p class="text-blush text-sm tracking-[0.3em] uppercase mb-4">Visit Us</p>
+                    <h2 class="font-serif text-4xl md:text-5xl mb-6">Book Your<br>Experience</h2>
+                    <p class="text-soft-gray mb-8 leading-relaxed">
+                        Ready to transform your look? Book your appointment online or give us a call. We recommend booking at least one week in advance for weekend appointments.
+                    </p>
+
+                    <div class="space-y-6 mb-8">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm flex-shrink-0">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-blush"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif text-lg mb-1">Location</h4>
+                                <p class="text-soft-gray">123 Madison Avenue<br>New York, NY 10016</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm flex-shrink-0">
+                                <i data-lucide="phone" class="w-5 h-5 text-blush"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif text-lg mb-1">Phone</h4>
+                                <p class="text-soft-gray">(212) 555-0147</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm flex-shrink-0">
+                                <i data-lucide="clock" class="w-5 h-5 text-blush"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif text-lg mb-1">Hours</h4>
+                                <p class="text-soft-gray">Mon - Fri: 9am - 8pm<br>Sat: 9am - 6pm<br>Sun: 10am - 4pm</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-charcoal text-white rounded-full flex items-center justify-center hover:bg-blush transition-colors">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-charcoal text-white rounded-full flex items-center justify-center hover:bg-blush transition-colors">
+                            <i data-lucide="facebook" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-charcoal text-white rounded-full flex items-center justify-center hover:bg-blush transition-colors">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Booking Form -->
+                <div class="bg-white p-8 md:p-10 rounded-sm shadow-lg fade-in">
+                    <h3 class="font-serif text-2xl mb-6">Request Appointment</h3>
+                    <form id="booking-form" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm uppercase tracking-wider text-soft-gray mb-2">First Name</label>
+                                <input type="text" required class="w-full px-4 py-3 border border-gray-200 rounded-sm focus:outline-none focus:border-blush transition-colors" placeholder="Jane">
+                            </div>
+                            <div>
+                                <label class="block text-sm uppercase tracking-wider text-soft-gray mb-2">Last Name</label>
+                                <input type="text" required class="w-full px-4 py-3 border border-gray-200 rounded-sm focus:outline-none focus:border-blush transition-colors" placeholder="Doe">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm uppercase tracking-wider text-soft-gray mb-2">Email</label>
+                            <input type="email" required class="w-full px-4 py-3 border border-gray-200 rounded-sm focus:outline-none focus:border-blush transition-colors" placeholder="jane@example.com">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm uppercase tracking-wider text-soft-gray mb-2">Phone</label>
+                            <input type="tel" required class="w-full px-4 py-3 border border-gray-200 rounded-sm focus:outline-none focus:border-blush transition-colors" placeholder="(555) 123-4567">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm uppercase tracking-wider text-soft-gray mb-2">Service Interested In</label>
+                            <select required class="w-full px-4 py-3 border border-gray-200 rounded-sm focus:outline-none focus:border-blush transition-colors bg-white">
+                                <option value="">Select a service</option>
+                                <option value="haircut">Haircut & Style</option>
+                                <option value="color">Hair Color</option>
+                                <option value="facial">Facial Treatment</option>
+                                <option value="manicure">Manicure/Pedicure</option>
+                                <option value="bridal">Bridal Services</option>
+                                <option value="massage">Massage Therapy</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm uppercase tracking-wider text-soft-gray mb-2">Preferred Date</label>
+                            <input type="date" required class="w-full px-4 py-3 border border-gray-200 rounded-sm focus:outline-none focus:border-blush transition-colors">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm uppercase tracking-wider text-soft-gray mb-2">Special Requests</label>
+                            <textarea rows="4" class="w-full px-4 py-3 border border-gray-200 rounded-sm focus:outline-none focus:border-blush transition-colors" placeholder="Tell us about your hair history or any specific requests..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 bg-charcoal text-white tracking-widest uppercase text-sm hover:bg-blush transition-colors rounded-sm">
+                            Submit Request
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-charcoal text-white py-12 px-6 border-t border-white/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="md:col-span-1">
+                    <a href="#" class="font-serif text-2xl font-bold tracking-wider text-white mb-4 block">
+                        Lumière<span class="text-blush">.</span>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Luxury hair, skin, and nail services in the heart of New York City.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-serif text-lg mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#about" class="hover:text-blush transition-colors">About Us</a></li>
+                        <li><a href="#services" class="hover:text-blush transition-colors">Services</a></li>
+                        <li><a href="#team" class="hover:text-blush transition-colors">Our Team</a></li>
+                        <li><a href="#gallery" class="hover:text-blush transition-colors">Gallery</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-serif text-lg mb-4">Services</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-blush transition-colors">Hair Styling</a></li>
+                        <li><a href="#" class="hover:text-blush transition-colors">Skin Care</a></li>
+                        <li><a href="#" class="hover:text-blush transition-colors">Nail Artistry</a></li>
+                        <li><a href="#" class="hover:text-blush transition-colors">Bridal Suite</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-serif text-lg mb-4">Newsletter</h4>
+                    <p class="text-gray-400 text-sm mb-4">Subscribe for exclusive offers and beauty tips.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="flex-1 px-4 py-2 bg-white/10 border border-white/20 rounded-l-sm focus:outline-none focus:border-blush text-sm">
+                        <button type="submit" class="px-4 py-2 bg-blush text-white rounded-r-sm hover:bg-blush-dark transition-colors">
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">&copy; 2024 Lumière Salon & Spa. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0 text-sm text-gray-400">
+                    <a href="#" class="hover:text-blush transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-blush transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Fade In Animation on Scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Testimonial Slider
+        const slides = document.querySelectorAll('.testimonial-slide');
+        const dots = document.querySelectorAll('.testimonial-dot');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => {
+                dot.classList.remove('bg-blush');
+                dot.classList.add('bg-white/30');
+            });
+            
+            slides[index].classList.add('active');
+            dots[index].classList.remove('bg-white/30');
+            dots[index].classList.add('bg-blush');
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                showSlide(currentSlide);
+            });
+        });
+
+        // Auto-advance testimonials
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }, 5000);
+
+        // Form Submission
+        document.getElementById('booking-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your booking request! We will contact you within 24 hours to confirm your appointment.');
+            e.target.reset();
+        });
+
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
